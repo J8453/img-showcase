@@ -12,7 +12,7 @@
           v-model="newUrl">
         <button type="submit">提交</button>
       </div>
-      <div class="form__row">
+      <div class="form__row hasReminder">
         <transition
           name="fade"
           v-on:after-enter="error = { hasError: false, msg: ''}">
@@ -131,12 +131,17 @@ form>* {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
   padding: 5px 10px;
 }
 
 form>.form__title {
   font-size: 2em;
   text-shadow: 0 0 5px #004585;
+}
+
+form>.form__row {
+  position: relative;
 }
 
 form>.form__row>* {
@@ -231,6 +236,7 @@ form>.form__row>button:hover {
 }
 
 .display__info {
+  margin-bottom: 10px;
   flex-basis: 100%;
   text-align: center;
 }

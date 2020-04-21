@@ -18,7 +18,6 @@ export default {
 <style scoped>
 .reminder {
   position: absolute;
-  top: 350px;
   width: 100%;
   text-align: center;
   display: flex;
@@ -26,7 +25,7 @@ export default {
 }
 
 .reminder__msg {
-  flex: 0 1 600px;
+  flex: 0 1 700px;
   background-color: #ffffff99;
   border: 1px solid #00000020;
   border-radius: 4px;
