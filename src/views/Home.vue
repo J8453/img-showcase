@@ -4,7 +4,7 @@
       <img src="../assets/messenger.svg" alt="">
     </div>
     <form v-on:submit.prevent="handleSubmit">
-      <div class="form__title">OH!</div>
+      <div class="form__title">SHOW YOUR IMAGES!</div>
       <div class="form__row">
         <input
           type="text"
@@ -23,10 +23,10 @@
       </div>
     </form>
     <div class="display" ref="display">
-      <div
-        class="display__info"
-        v-if="size">
-        The following image(s)'s size is <span>{{ size.width }}</span>px * <span>{{ size.height }}</span>px.
+      <div class="display__info">
+        <p v-if="size">
+          The following {{ hasOnlyOneImg ? 'image is' : 'images are' }} showing at <span>{{ size.width }}</span>px * <span>{{ size.height }}</span>px.
+        </p>
       </div>
       <div
         class="display__image"
@@ -62,6 +62,11 @@ export default {
       }
     }
   },
+  computed: {
+    hasOnlyOneImg: function () {
+      return this.urls.length===1
+    }
+  },
   methods: {
     handleSubmit: function () {
       if (!this.newUrl.match(/\.jpg$|\.png$/i)) {
@@ -90,8 +95,8 @@ export default {
     }
   },
   mounted: function () {
-    this.$watch('urls', function (val, oldVal) {
-      if (val.length === 1 && oldVal.length === 0) {
+    this.$watch('urls', function (val) {
+      if (val.length >= 1 && val.length <= 3) {
         this.getSize()
       } else if (val.length === 0) {
         this.size = null
@@ -178,18 +183,44 @@ form>.form__row>button:hover {
   .display__image {
     flex-basis: 33.3%;
   }
+  .display>div:nth-of-type(2) {
+    flex: 1 0 33.3%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .display>div:nth-of-type(3) {
+    flex: 1 0 33.3%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
 }
 
-@media (min-width: 551px) and (max-width: 1000px) {
+@media (min-width: 751px) and (max-width: 1000px) {
   .container {
     width: 80%;
   }
   .display__image {
     flex-basis: 50%;
   }
+  .display>div:nth-of-type(2) {
+    margin: 0 auto;
+  }
 }
 
-@media (max-width: 750px) {
+@media (min-width: 551px) and (max-width: 750px) {
+  .container {
+    width: 80%;
+  }
+  .display__image {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 550px) {
+  .container {
+    width: 100%;
+  }
+
   .display__image {
     flex-basis: 100%;
   }
@@ -202,10 +233,9 @@ form>.form__row>button:hover {
 .display__info {
   flex-basis: 100%;
   text-align: center;
-  margin: 15px 0;
 }
 
-.display__info>span {
+.display__info>p>span {
   background-color: #00458590;
 }
 
