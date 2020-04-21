@@ -48,7 +48,7 @@
 import Reminder from '../components/Reminder'
 import ImageBox from '../components/ImageBox'
 export default {
-  name: 'App',
+  name: 'Home',
   components: { Reminder, ImageBox },
   data () {
     return {
@@ -124,6 +124,7 @@ export default {
 .logo>img {
   margin: 30px 0;
   width: 150px;
+  height: 150px;
 }
 
 form>* {
